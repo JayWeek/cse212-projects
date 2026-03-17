@@ -13,7 +13,20 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        /// firstly we create a list that will store the multiples. This should be outside the for loop
+        /// next create a for loop  that  iterates the number of length times
+        /// with each iteration, i will be multiplied with the number
+        /// the result of this will be appended to the list
+        /// once the for loop reaches the limit then it should stop and return the list of multiples.
+        
+        List<double> multiples_list = new List<double>();
+        for (int i = 1; i < length; i++)
+        {
+           double multiple =  number * i ;
+           multiples_list.Add(multiple);
+        }
+
+        return multiples_list.ToArray(); // replace this return statement with your own
     }
 
     /// <summary>

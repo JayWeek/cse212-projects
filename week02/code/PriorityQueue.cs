@@ -9,7 +9,7 @@
     /// </summary>
     /// <param name="value">The value</param>
     /// <param name="priority">The priority</param>
-    public void Enqueue(string value, int priority)
+    public void Enqueue(string value, int priority) 
     {
         var newNode = new PriorityItem(value, priority);
         _queue.Add(newNode);
@@ -17,21 +17,27 @@
 
     public string Dequeue()
     {
-        if (_queue.Count == 0) // Verify the queue is not empty
+        if (_queue.Count == 0)
         {
             throw new InvalidOperationException("The queue is empty.");
         }
 
-        // Find the index of the item with the highest priority to remove
-        var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        int highPriorityIndex = 0;
+
+        // FIX 1: iterate through ALL elements
+        for (int index = 1; index < _queue.Count; index++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            // FIX 2: strictly greater (preserves FIFO)
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority)
+            {
                 highPriorityIndex = index;
+            }
         }
 
-        // Remove and return the item with the highest priority
+        // FIX 3: remove the item after selecting it
         var value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex);
+
         return value;
     }
 
