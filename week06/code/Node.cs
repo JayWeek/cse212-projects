@@ -12,6 +12,10 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
+        if (value == Data)
+        {
+            return; //We do nothing since its a duplicate
+        }
 
         if (value < Data)
         {
@@ -34,12 +38,47 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+        if (value == Data) return true;
+        
+        if (value < Data)
+            return Left != null && Left.Contains(value);
+        
+        return Right != null && Right.Contains(value);
+        
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        int leftHeight = 0;
+        int rightHeight = 0;
+
+        // 1. Calculate the height of the left side
+        if (Left != null)
+        {
+            leftHeight = Left.GetHeight();
+        }
+        // (If Left is null, leftHeight stays 0)
+
+        // 2. Calculate the height of the right side
+        if (Right != null)
+        {
+            rightHeight = Right.GetHeight();
+        }
+        // (If Right is null, rightHeight stays 0)
+
+        // 3. Find which side is bigger
+        int maxChildHeight;
+        if (leftHeight > rightHeight)
+        {
+            maxChildHeight = leftHeight;
+        }
+        else
+        {
+            maxChildHeight = rightHeight;
+        }
+
+        // 4. Return the maximum side plus 1 (for this current node)
+        return maxChildHeight + 1;
     }
+
 }
